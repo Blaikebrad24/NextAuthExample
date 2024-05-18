@@ -12,6 +12,8 @@ import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
+import { prismaDB } from "@/lib/db";
+
 
 export function RegisterForm() {
 
