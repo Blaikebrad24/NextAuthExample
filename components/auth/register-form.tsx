@@ -19,7 +19,8 @@ export function RegisterForm() {
 
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState<string | undefined>("");
-    const [success, setSuccess] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>(""); 
+    
 
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
