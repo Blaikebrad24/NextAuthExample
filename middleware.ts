@@ -1,5 +1,5 @@
 /**
- * Stopped video at 2:35:40 -> Implemented NextJS Edge middleware and able to get request info. Redirects to settings page if logged in [SUCCESS]
+ * Stopped video at 2:37:57 -> Removing Github Provider
  */
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
@@ -25,7 +25,8 @@ const isAuthRoute = authRoutes.includes(nextUrl.pathname); // if already logged 
 
 //allow every API route
 if(isAPiAuthRoute){
-    return null;
+    console.log("TRUE: requesting an API AUTH ROUTE")
+    return;
 }
 
 // check if we are on auth route
@@ -34,7 +35,7 @@ if(isAuthRoute){
     if(isLoggedIn){
         return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
     }
-    return null;
+    return;
 }
 
 if(!isLoggedIn && !isPublicRoute)
@@ -42,7 +43,7 @@ if(!isLoggedIn && !isPublicRoute)
         return Response.redirect(new URL("/auth/login", nextUrl));
     }
 
-    return null;
+    return;
 })
  
 // Optionally, don't invoke Middleware on some paths
