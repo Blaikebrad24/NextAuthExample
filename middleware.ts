@@ -1,5 +1,6 @@
 /**
  * Stopped video at 2:37:57 -> Removing Github Provider
+ * Going to move this to Mac mobile
  */
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
