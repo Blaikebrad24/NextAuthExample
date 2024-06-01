@@ -33,6 +33,7 @@ if(isAPiAuthRoute){
 // check if we are on auth route
 if(isAuthRoute){
     // check login 
+    console.log(`Requesting: /auth/login or /auth/register`);
     if(isLoggedIn){
         return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
     }
