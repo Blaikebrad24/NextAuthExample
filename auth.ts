@@ -5,9 +5,19 @@ import { prismaDB } from "./lib/db"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { getUserById } from "@/data/user" 
 export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
-
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
+  events: {
+    async linkAccount({ user }){
+      await prismaDB.user.update({
+        where: { id: user.id }, 
+        data: { emailVerified: new Date()}
+      })
+    }
+  },
   callbacks: {
-
 
     async session({ token, session }){
       console.log({ sessionToken : token,})
