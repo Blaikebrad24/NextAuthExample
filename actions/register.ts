@@ -4,6 +4,7 @@ import { RegisterSchema } from "@/schemas";
 import bcrypt from "bcryptjs";
 import { prismaDB } from "@/lib/db";
 import { hash } from "crypto";
+import { generateVerificationToken } from "@/lib/tokens";
 
 
 export const register = async (values : z.infer<typeof RegisterSchema>) => {
@@ -17,7 +18,6 @@ export const register = async (values : z.infer<typeof RegisterSchema>) => {
     {
         return {error : "Invalid fields!"};
     }
-    console.log("Something here")
     const { email, password, name } = validatedFields.data;
     const hashedPassword = await bcrypt.hash(password,10);
     
@@ -26,8 +26,6 @@ export const register = async (values : z.infer<typeof RegisterSchema>) => {
     if(existingUser){return {error: "Email already in use!"}};
 
     await prismaDB.user.create({ data:{name,email, password: hashedPassword}});
-    const users = await prismaDB.user.findMany();
-    users.map((user) => console.log(user))
-    console.log("User gets created here : ")
-    return { success : "User created"}
+    const verificationToken = await generateVerificationToken(email)
+    return { success : "Confirmation email sent"}
 }
