@@ -20,7 +20,7 @@ export const authRoutes = [
 // important that all users can access the auth endpoint
 /**
  * Prefix for API authentication routes
- * Routes taht start with this prefix are used for API 
+ * Routes that start with this prefix are used for API 
  * authentication purposes
  */
 export const apiAuthPrefix = "/api/auth";
