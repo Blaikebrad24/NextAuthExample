@@ -27,5 +27,7 @@ export const register = async (values : z.infer<typeof RegisterSchema>) => {
 
     await prismaDB.user.create({ data:{name,email, password: hashedPassword}});
     const verificationToken = await generateVerificationToken(email)
+    // do not allow user to sign in if they have not verified by email
+    //update user on the login form
     return { success : "Confirmation email sent"}
 }
